@@ -441,39 +441,155 @@ vec4 shadow2DLod(sampler2DShadow sampler, vec3 coord, float lod) { return vec4(t
 
 
 
-/* DRAWBUFFERS:01 */
+/* DRAWBUFFERS:02 */ //0=gcolor, 2=gnormal for normals
+/*
+Sildur's Enhanced Default:
+https://www.patreon.com/Sildur
+https://sildurs-shaders.github.io/
+https://twitter.com/Sildurs_shaders
+https://www.curseforge.com/minecraft/customization/sildurs-enhanced-default
+
+Permissions:
+You are not allowed to edit, copy code or share my shaderpack under a different name or claim it as yours.
+*/
+
+
+/*
+Sildur's Enhanced Default:
+https://www.patreon.com/Sildur
+https://sildurs-shaders.github.io/
+https://twitter.com/Sildurs_shaders
+https://www.curseforge.com/minecraft/customization/sildurs-enhanced-default
+
+Permissions:
+You are not allowed to edit, copy code or share my shaderpack under a different name or claim it as yours.
+*/
+
+    
+    
+
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    
+    
+    
 
 
 
-uniform sampler2D texture;
-varying vec4 color;
-varying vec4 texcoord;
-varying vec3 normal;
+    
+    
+
+    
+    
 
 
 
+    
+
+    
 	
+        
+	    
+	    
+	
+    
+	    
+
+    
+        
+
 
 
     
 
 
 
+    
+
+    
+
+    
+
+    
+        
+        
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
+
+    
+    
+    
+
+
+varying vec2 texcoord;
+varying vec4 color;
+uniform sampler2D texture;
+
+
+const int GL_LINEAR = 9729;
+const int GL_EXP = 2048;
+uniform int fogMode;
+
+
 void irisMain() {
 
+	gl_FragData[0] = texture2D(texture, texcoord.xy)*color;
+	gl_FragData[1] = vec4(0.0); //fill normal buffer with 0.0, improves performance
 
-	
-	
 
-	
-	
-	
-
-	
-	
-
-	discard;
-
+	if (fogMode == GL_EXP) {
+		gl_FragData[0].rgb = mix(gl_FragData[0].rgb, gl_Fog.color.rgb, 1.0 - clamp(exp(-gl_Fog.density * gl_FogFragCoord), 0.0, 1.0));
+	} else if (fogMode == GL_LINEAR) {
+		gl_FragData[0].rgb = mix(gl_FragData[0].rgb, gl_Fog.color.rgb, clamp((gl_FogFragCoord - gl_Fog.start) * gl_Fog.scale, 0.0, 1.0));
+	}
 
 }
 

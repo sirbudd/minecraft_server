@@ -441,257 +441,29 @@ vec4 shadow2DLod(sampler2DShadow sampler, vec3 coord, float lod) { return vec4(t
 
 
 
-
-
+/* DRAWBUFFERS:02 */ //0=gcolor, 2=gnormal for normals
 /*
-Thank you for downloading Sildur's vibrant shaders, make sure you got it from the official source found here:
+Sildur's Enhanced Default:
+https://www.patreon.com/Sildur
 https://sildurs-shaders.github.io/
+https://twitter.com/Sildurs_shaders
+https://www.curseforge.com/minecraft/customization/sildurs-enhanced-default
+
+Permissions:
+You are not allowed to edit, copy code or share my shaderpack under a different name or claim it as yours.
 */
 
-    
-    
-    
-    
-    const float shadowDistance = 70.0;			//Render distance of shadows. 60=lite, 80=med, 80=high, 120=extreme [60.0 70.0 80.0 90.0 100.0 110.0 120.0 130.0 140.0 150.0 160.0 170.0 180.0 190.0 200.0 210.0 220.0 230.0 240.0 250.0 260.0 270.0 280.0 290.0 300.0 310.0 320.0 330.0 340.0 350.0 360.0 370.0 380.0 390.0 400.0]
-    const int shadowMapResolution = 512;		//Shadows resolution. [256 512 1024 2048 3072 4096 6144 8192 16384] 512=lite, 1024=med, 2048=high, 3072=extreme 
-    const float k = 1.8;
-    
-    
-    float a = exp(0.05);
-    float b = (exp(1.4)-a)*shadowDistance/128.0;
-    float calcDistortion(vec2 worldpos){
-        return 1.0/(log(length(worldpos)*b+a)*k);
-    }
-    
-
-
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-        
-
-    
-        
-    
-
-    
-
-    
-        
-	    
-
-    
-
-    
-
-    
-
-    
-    
-    
-    
-    
-    
-        
-    
-
-    
-    
-    
-    
-
-
-
-	
-    
-	
-		
-	
-
-	
-	
-	
-		
-        
-    
-		
-		
-
-	
-		
-		
-		
-        
-
-	
-	
-	
-    
-    
-    
-    
-
-    
-    
-    
-    
-
-	
-	
-	
-
-	
-
-    
-    
-
-	
-	
-	
-
-    
-        
-    
-    
-        
-    
-
-
-
-    
-    
-
-    
-    
-
-
-
-    
-
-
-
-    
-    
-
-
-
-    
-
-    
-
-    
-
-    
-	    
-        
-
-    
-
-    
-	
-    
-    
-    
-    
-    
-	
-
-    
-
- 
-
-    
-
-
-
-    
-    
-    
-    
-
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-
-
-    
-    
-    
-    
-    
-
-
-
-    
-    
-    
-
-    
-    
-    
-    
-
-    
-    
-    
-    
-
-    
-    
-    
-
-
-
-    
-
-
-
-	
-    
-	
-	
-
-
-
-varying vec4 texcoord;
+varying vec3 texcoord;
 uniform sampler2D texture;
 uniform int blockEntityId;
-uniform int entityId;
-
 
 void irisMain() {
 
+	vec4 color = texture2D(texture, texcoord.xy)*texcoord.z;
+	if(blockEntityId == 10089.0)color *= 0.0;			 	//remove beacon beam shadows, 10089 is actually the id of all emissive blocks but only the beam should be a block entity
 
-	vec4 color = texture2D(texture, texcoord.xy);
-	if(texcoord.z > 0.9)color.rgb = vec3(1.0, 1.0, 1.0);	//water shadows color
-	if(texcoord.w > 0.9)color = vec4(0.0); 					//disable shadows on entities defined in vertex shadows
-	if(entityId == 11000.0)color *= 0.0;					//remove lightning strike shadow.
-	
-	
-	
 	gl_FragData[0] = color;
-
-	
-
+	gl_FragData[1] = vec4(0.0); //improves performance	
 }
 
 

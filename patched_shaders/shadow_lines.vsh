@@ -456,185 +456,88 @@ vec4 shadow2DLod(sampler2DShadow sampler, vec3 coord, float lod) { return vec4(t
 
 
 
+/*
+Sildur's Enhanced Default:
+https://www.patreon.com/Sildur
+https://sildurs-shaders.github.io/
+https://twitter.com/Sildurs_shaders
+https://www.curseforge.com/minecraft/customization/sildurs-enhanced-default
+
+Permissions:
+You are not allowed to edit, copy code or share my shaderpack under a different name or claim it as yours.
+*/
 
 
 /*
-Thank you for downloading Sildur's vibrant shaders, make sure you got it from the official source found here:
+Sildur's Enhanced Default:
+https://www.patreon.com/Sildur
 https://sildurs-shaders.github.io/
+https://twitter.com/Sildurs_shaders
+https://www.curseforge.com/minecraft/customization/sildurs-enhanced-default
+
+Permissions:
+You are not allowed to edit, copy code or share my shaderpack under a different name or claim it as yours.
 */
 
     
     
+
+    
+
     
     
-    const float shadowDistance = 70.0;			//Render distance of shadows. 60=lite, 80=med, 80=high, 120=extreme [60.0 70.0 80.0 90.0 100.0 110.0 120.0 130.0 140.0 150.0 160.0 170.0 180.0 190.0 200.0 210.0 220.0 230.0 240.0 250.0 260.0 270.0 280.0 290.0 300.0 310.0 320.0 330.0 340.0 350.0 360.0 370.0 380.0 390.0 400.0]
-    const int shadowMapResolution = 512;		//Shadows resolution. [256 512 1024 2048 3072 4096 6144 8192 16384] 512=lite, 1024=med, 2048=high, 3072=extreme 
-    const float k = 1.8;
+    
+
     
     
-    float a = exp(0.05);
-    float b = (exp(1.4)-a)*shadowDistance/128.0;
-    float calcDistortion(vec2 worldpos){
-        return 1.0/(log(length(worldpos)*b+a)*k);
-    }
+    
+
+    
+    
     
 
 
 
     
     
+
     
     
+
+
+
     
+
     
-    
-    
-    
-    
+	
         
-
+	    
+	    
+	
     
-        
-    
-
-    
-
-    
-        
 	    
 
     
-
-    
-
-    
-
-    
-    
-    
-    
-    
-    
-        
-    
-
-    
-    
-    
-    
-
-
-
-	
-    
-	
-		
-	
-
-	
-	
-	
-		
-        
-    
-		
-		
-
-	
-		
-		
-		
         
 
-	
-	
-	
+
+
     
-    
-    
+
+
+
     
 
     
-    
-    
-    
-
-	
-	
-	
-
-	
 
     
-    
-
-	
-	
-	
 
     
         
-    
-    
-        
-    
-
-
-
-    
-    
-
-    
-    
-
-
-
-    
-
-
-
-    
-    
-
-
-
-    
-
-    
-
-    
-
-    
-	    
         
 
     
-
     
-	
-    
-    
-    
-    
-    
-	
-
-    
-
- 
-
-    
-
-
-
-    
-    
-    
-    
-
-    
-    
-
     
     
     
@@ -646,16 +549,10 @@ https://sildurs-shaders.github.io/
     
     
 
-
+    
 
     
     
-    
-    
-    
-
-
-
     
     
     
@@ -669,30 +566,30 @@ https://sildurs-shaders.github.io/
     
     
     
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
 
     
     
     
 
 
-
-    
-
-
-
-	
-    
-	
-	
-
-
-
-varying vec4 texcoord;
+varying vec3 texcoord;
 attribute vec4 mc_Entity;
 
+
 vec2 calcShadowDistortion(in vec2 shadowpos) {
-  float distortion = log(length(shadowpos.xy)*b+a)*k;
-  return shadowpos.xy / distortion;
+	float distortion = ((1.0 - 0.80) + length(shadowpos.xy * 1.25) * 0.80) * 0.85;
+	return shadowpos.xy / distortion;
 }
 
 
@@ -700,19 +597,18 @@ void irisMain() {
 
 vec4 position = gl_ModelViewProjectionMatrix * gl_Vertex;
 
+	 position.xy = calcShadowDistortion(position.xy);
 
-	position.xy = calcShadowDistortion(position.xy);
-	position.z /= 6.0;
-
-	texcoord.xy = (gl_MultiTexCoord0).xy;
-	texcoord.z = 0.0;
-	texcoord.w = 0.0;
-	if(mc_Entity.x == 10008.0) texcoord.z = 1.0;
-	
-	
-	
 
 	gl_Position = position;
+
+	texcoord.xy = (gl_MultiTexCoord0).xy;
+	texcoord.z = 1.0;
+
+	if(mc_Entity.x == 10008.0) texcoord.z = 0.0;
+
+	
+
 }
 
 

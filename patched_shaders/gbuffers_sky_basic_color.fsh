@@ -441,9 +441,36 @@ vec4 shadow2DLod(sampler2DShadow sampler, vec3 coord, float lod) { return vec4(t
 
 
 
+/* DRAWBUFFERS:02 */ //0=gcolor, 2=gnormal for normals
+/*
+Sildur's Enhanced Default:
+https://www.patreon.com/Sildur
+https://sildurs-shaders.github.io/
+https://twitter.com/Sildurs_shaders
+https://www.curseforge.com/minecraft/customization/sildurs-enhanced-default
+
+Permissions:
+You are not allowed to edit, copy code or share my shaderpack under a different name or claim it as yours.
+*/
+
+varying vec4 color;
+
+uniform int isEyeInWater;
+const int GL_LINEAR = 9729;
+const int GL_EXP = 2048;
+uniform int fogMode;
 
 void irisMain() {
-	gl_FragData[0] = vec4(0.0, 0.0, 0.0, 1.0); //fill with zeros to avoid issues, alpha has to be set to 1.0 to fix an optifine issue in 1.17+ causing the sky to be black at certain angles.
+
+	gl_FragData[0] = color;
+	if (fogMode == GL_EXP) {
+		gl_FragData[0].rgb = mix(gl_FragData[0].rgb, gl_Fog.color.rgb, 1.0 - clamp(exp(-gl_Fog.density * gl_FogFragCoord), 0.0, 1.0));
+	} else if (fogMode == GL_LINEAR) {
+		gl_FragData[0].rgb = mix(gl_FragData[0].rgb, gl_Fog.color.rgb, clamp((gl_FogFragCoord - gl_Fog.start) * gl_Fog.scale, 0.0, 1.0));
+	} else if (isEyeInWater == 1.0 || isEyeInWater == 2.0){
+		gl_FragData[0].rgb = mix(gl_FragData[0].rgb, gl_Fog.color.rgb, 1.0 - clamp(exp(-gl_Fog.density * gl_FogFragCoord), 0.0, 1.0));
+	}
+    gl_FragData[1] = vec4(0.0); //fills normal buffer with 0.0, improves overall performance
 }
 
 

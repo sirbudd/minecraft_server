@@ -456,185 +456,88 @@ vec4 shadow2DLod(sampler2DShadow sampler, vec3 coord, float lod) { return vec4(t
 
 
 
+/*
+Sildur's Enhanced Default:
+https://www.patreon.com/Sildur
+https://sildurs-shaders.github.io/
+https://twitter.com/Sildurs_shaders
+https://www.curseforge.com/minecraft/customization/sildurs-enhanced-default
+
+Permissions:
+You are not allowed to edit, copy code or share my shaderpack under a different name or claim it as yours.
+*/
 
 
 /*
-Thank you for downloading Sildur's vibrant shaders, make sure you got it from the official source found here:
+Sildur's Enhanced Default:
+https://www.patreon.com/Sildur
 https://sildurs-shaders.github.io/
+https://twitter.com/Sildurs_shaders
+https://www.curseforge.com/minecraft/customization/sildurs-enhanced-default
+
+Permissions:
+You are not allowed to edit, copy code or share my shaderpack under a different name or claim it as yours.
 */
 
     
     
+
+    
+
     
     
     
+
     
     
     
+
     
     
     
+
+
+
+    //#define TAA                               //Toggle temporal anti-aliasing (TAA)
     
+
+    
+    
+
+
+
+    
+
+    
+	
         
+	    
+	    
+	
     
-    
-
-
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-        
-
-    
-        
-    
-
-    
-
-    
-        
 	    
 
     
-
-    
-
-    
-
-    
-    
-    
-    
-    
-    
-        
-    
-
-    
-    
-    
-    
-
-
-
-	
-    
-	
-		
-	
-
-	
-	
-	
-		
-        
-    
-		
-		
-
-	
-		
-		
-		
         
 
-	
-	
-	
+
+
     
-    
-    
+
+
+
     
 
     
-    
-    
-    
-
-	
-	
-	
-
-	
 
     
-    
-
-	
-	
-	
 
     
         
-    
-    
-        
-    
-
-
-
-    //#define TAA							        //Toggle temporal anti-aliasing (TAA)
-    
-
-    //#define Adaptive_sharpening			    //Toggle adaptive sharpening. Recommended to use with TAA. Disabling TAA also disables adaptive sharpening.
-    
-
-
-
-    
-
-
-
-    
-    
-
-
-
-    
-
-    
-
-    
-
-    
-	    
         
 
     
-
     
-	
-    
-    
-    
-    
-    
-	
-
-    
-
- 
-
-    
-
-
-
-    
-    
-    
-    
-
-    
-    
-
     
     
     
@@ -646,16 +549,10 @@ https://sildurs-shaders.github.io/
     
     
 
-
+    
 
     
     
-    
-    
-    
-
-
-
     
     
     
@@ -669,26 +566,25 @@ https://sildurs-shaders.github.io/
     
     
     
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
 
     
     
     
 
 
-
-    
-
-
-
-	
-    
-	
-	
-
-
+varying vec2 texcoord;
 varying vec4 color;
-varying vec4 texcoord;
-varying vec3 normal;
 
 
 
@@ -706,18 +602,16 @@ varying vec3 normal;
 
 
 void main() {
-	
 	gl_Position = ftransform();
+	gl_FogFragCoord = length(gl_Position.xyz);
+	
 
 	
 
-	texcoord.xy = (gl_MultiTexCoord0).xy;
-	texcoord.zw = gl_MultiTexCoord1.xy/255.0;
 
+	texcoord = (gl_MultiTexCoord0).xy;
+	
 	color = gl_Color;
-	
-	normal = normalize(gl_NormalMatrix * gl_Normal);	
-
 }
 
 

@@ -455,17 +455,158 @@ vec4 shadow2DLod(sampler2DShadow sampler, vec3 coord, float lod) { return vec4(t
 
 
 
+/*
+Sildur's Enhanced Default:
+https://www.patreon.com/Sildur
+https://sildurs-shaders.github.io/
+https://twitter.com/Sildurs_shaders
+https://www.curseforge.com/minecraft/customization/sildurs-enhanced-default
 
-varying vec4 color;
+Permissions:
+You are not allowed to edit, copy code or share my shaderpack under a different name or claim it as yours.
+*/
+
+
+/*
+Sildur's Enhanced Default:
+https://www.patreon.com/Sildur
+https://sildurs-shaders.github.io/
+https://twitter.com/Sildurs_shaders
+https://www.curseforge.com/minecraft/customization/sildurs-enhanced-default
+
+Permissions:
+You are not allowed to edit, copy code or share my shaderpack under a different name or claim it as yours.
+*/
+
+    
+    
+
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
+
+
+    //#define TAA                               //Toggle temporal anti-aliasing (TAA)
+    
+
+    
+    
+
+
+
+    
+
+    
+	
+        
+	    
+	    
+	
+    
+	    
+
+    
+        
+
+
+
+    
+
+
+
+    
+
+    
+
+    
+
+    
+        
+        
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
+
+    
+    
+    
+
+
 varying vec2 texcoord;
+varying vec4 color;
+
+
+
+
+
+
+
+								
+								
+								
+								
+								
+								
+								
+
 
 void main() {
-
-	texcoord = (iris_TextureMat * gl_MultiTexCoord0).xy;
-
-	color = gl_Color;
-	
 	gl_Position = ftransform();
+
+	
+
+	texcoord = (gl_MultiTexCoord0).xy;
+	color = gl_Color;
 }
 
 

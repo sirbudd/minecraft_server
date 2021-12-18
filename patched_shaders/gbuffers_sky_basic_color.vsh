@@ -454,9 +454,25 @@ vec4 shadow2DLod(sampler2DShadow sampler, vec3 coord, float lod) { return vec4(t
 
 
 
+/*
+Sildur's Enhanced Default:
+https://www.patreon.com/Sildur
+https://sildurs-shaders.github.io/
+https://twitter.com/Sildurs_shaders
+https://www.curseforge.com/minecraft/customization/sildurs-enhanced-default
+
+Permissions:
+You are not allowed to edit, copy code or share my shaderpack under a different name or claim it as yours.
+*/
+
+varying vec4 color;
 
 void main() {
 	gl_Position = ftransform();
+	
+	gl_FogFragCoord = gl_Position.z;
+
+	color = gl_Color;
 }
 
 
