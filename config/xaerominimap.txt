@@ -19,7 +19,7 @@ distance:1
 showCoords:true
 lockNorth:false
 zoom:0
-minimapSize:129
+minimapSize:107
 chunkGrid:-1
 slimeChunks:false
 mapSafeMode:false
@@ -42,7 +42,7 @@ waypointsDistanceMin:0.0
 waypointTPCommand:/tp @s
 arrowScale:1.5
 arrowColour:0
-smoothDots:true
+smoothDots:false
 worldMap:true
 terrainDepth:true
 terrainSlopes:2

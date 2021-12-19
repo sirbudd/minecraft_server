@@ -21,6 +21,7 @@ mode = "fancy"
 
 			[light_sources.settings.entities.minecraft]
 				chicken = true
+				panda = true
 				axolotl = true
 				bee = true
 				donkey = true
@@ -42,10 +43,14 @@ mode = "fancy"
 				pufferfish = true
 				dolphin = true
 				item = true
+				stray = true
+				turtle = true
 				wolf = true
 				villager = true
 				salmon = true
 				zombie_villager = true
+				goat = true
+				ocelot = true
 				polar_bear = true
 				horse = true
 				glow_squid = true
@@ -54,10 +59,12 @@ mode = "fancy"
 				glow_item_frame = false
 				squid = true
 				spider = true
+				parrot = true
 				creeper = true
 				enderman = true
 
 			[light_sources.settings.entities.adventurez]
 				deer = true
+				iguana = true
 				amethyst_golem = true
 
